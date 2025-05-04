@@ -92,7 +92,7 @@ def main():
         os.makedirs(save_dir, exist_ok=True)
         from datetime import datetime, timedelta, timezone
         KST = timezone(timedelta(hours=9))
-        kst_now = datetime.now(KST)
+        kst_now = datetime.utcnow().replace(tzinfo=timezone.utc).astimezone(KST)
         today = kst_now.strftime("%Y-%m-%d")
         save_path = os.path.join(save_dir, f"events_{today}.json")
 
