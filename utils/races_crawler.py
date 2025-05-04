@@ -90,12 +90,12 @@ def main():
     if collected_events:
         save_dir = "output"
         os.makedirs(save_dir, exist_ok=True)
-        from datetime import datetime
-        from zoneinfo import ZoneInfo  # Python 3.9 이상 기본 제공
-
-        kst_now = datetime.now(ZoneInfo("Asia/Seoul"))        
+        from datetime import datetime, timedelta, timezone
+        KST = timezone(timedelta(hours=9))
+        kst_now = datetime.now(KST)
         today = kst_now.strftime("%Y-%m-%d")
         save_path = os.path.join(save_dir, f"events_{today}.json")
+
 
         with open(save_path, "w", encoding="utf-8") as f:
             json.dump(collected_events, f, ensure_ascii=False, indent=2)
