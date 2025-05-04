@@ -1,0 +1,3 @@
+# SmartChip crawler output - allow json only
+output/*
+!output/*.json
