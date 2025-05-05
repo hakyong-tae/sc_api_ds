@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timezone, timedelta
 import json
 import os
 from selenium import webdriver
@@ -90,9 +90,9 @@ def main():
     if collected_events:
         save_dir = "output"
         os.makedirs(save_dir, exist_ok=True)
-        from datetime import datetime, timedelta, timezone
         KST = timezone(timedelta(hours=9))
-        kst_now = datetime.utcnow().replace(tzinfo=timezone.utc).astimezone(KST)
+        utc_now = datetime.now(timezone.utc)   # <- 이게 핵심
+        kst_now = utc_now.astimezone(KST)
         today = kst_now.strftime("%Y-%m-%d")
         save_path = os.path.join(save_dir, f"events_{today}.json")
 
